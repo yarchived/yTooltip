@@ -38,7 +38,8 @@ local display_talent = function(talent)
             return tl:SetText(TALENTS_PREFIX ..talent)
         end
     end
-    return GameTooltip:AddLine(TALENTS_PREFIX..talent)
+    GameTooltip:AddLine(TALENTS_PREFIX..talent)
+    GameTooltip:Show()
 end
 
 local get_talent = function(unit)

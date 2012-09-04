@@ -1,5 +1,5 @@
--- local
-local TEXTURE = [[Interface\AddOns\yLite\Textures\FlatSmooth]]
+
+local TEXTURE = [[Interface\AddOns\yTooltip\FlatSmooth]]
 local ICON_SIZE = 24
 local COLOR_GUILD_SAME = '|cffff32ff'
 local COLOR_GUILD = '|cff25c1eb'
@@ -173,9 +173,6 @@ f:SetScript('OnUpdate', function(self, elps)
             GameTooltipTextRight1:SetText('|cffD7BEA5>>|rNONE')
         end
         GameTooltipTextRight1:Show()
-
-        --	else
-        --		GameTooltipTextRight1:Hide()
     end
 end)
 
@@ -209,7 +206,7 @@ GameTooltipStatusBar.Text = GameTooltipStatusBar:CreateFontString(nil, 'OVERLAY'
 GameTooltipStatusBar.Text:SetFont(STANDARD_TEXT_FONT, 10, 'OUTLINE')
 GameTooltipStatusBar.Text:SetPoint('CENTER', GameTooltipStatusBar)
 
-local bar = CreateFrame('StatusBar', 'GameTooltipStatusBar2', GameTooltipStatusBar)
+local bar = CreateFrame('StatusBar', nil --[[ 'GameTooltipStatusBar2' ]], GameTooltipStatusBar)
 bar:SetStatusBarTexture(TEXTURE)
 bar:SetHeight(8)
 bar:SetPoint('TOPLEFT', GameTooltipStatusBar, 'BOTTOMLEFT', 0, -3)
@@ -234,15 +231,22 @@ Script(bar, 'OnShow', function(self)
     end
 end)
 
+Script(bar, 'OnHide', function(self)
+    self.unit = nil
+end)
+
 Script(bar, 'OnUpdate', function(self, elps)
     self.total = self.total - elps
     if self.total > 0 then return end
-    self.total = .1
+    self.total = .2
     if not self.unit then return end
-    --[[if not UnitExists('mouseover') then -- self.unit
-    --GameTooltip:Hide()
-    return
-    end]]
+
+    if not UnitExists'mouseover' then
+        GameTooltip:Hide()
+        self.unit = nil
+        return
+    end
+
     if not self.unit then return end
     local min, max = UnitMana(self.unit), UnitManaMax(self.unit)
 
