@@ -88,3 +88,4 @@ GameTooltip:HookScript('OnTooltipSetUnit',function(self,...)
         return inspect_unit(unit)
     end
 end)
+
