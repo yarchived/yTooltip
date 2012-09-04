@@ -227,9 +227,11 @@ Script(bar, 'OnShow', function(self)
     self.max = 0
     if not u then return end
 
-    local powerType, powerTypeString = UnitPowerType(u)
-    local c = PowerBarColor[powerTypeString]
-    self:SetStatusBarColor(c.r, c.g, c.b)
+    local powerType = UnitPowerType(u)
+    local c = PowerBarColor[powerType]
+    if(c) then
+        return self:SetStatusBarColor(c.r, c.g, c.b)
+    end
 end)
 
 Script(bar, 'OnUpdate', function(self, elps)
