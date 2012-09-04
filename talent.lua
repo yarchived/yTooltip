@@ -48,6 +48,7 @@ local get_talent = function(unit)
         return name
     end
 end
+
 function frame:INSPECT_READY()
     if(frame.inspect and GameTooltip:GetUnit() == frame.insName) then
         frame.inspect = false
