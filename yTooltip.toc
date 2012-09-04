@@ -3,3 +3,4 @@
 tooltip.lua
 borderColor.lua
 spellid.lua
+talent.lua

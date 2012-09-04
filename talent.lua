@@ -34,7 +34,7 @@ end
 local display_talent = function(talent)
     for i = 2, GameTooltip:NumLines() do
         local tl = _G['GameTooltipTextLeft'..i]
-        if(tl and tl:match('^'..TALENTS_PREFIX)) then
+        if(tl and tl:GetText():match('^'..TALENTS_PREFIX)) then
             return tl:SetText(TALENTS_PREFIX ..talent)
         end
     end
