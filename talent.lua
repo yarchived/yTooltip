@@ -8,6 +8,7 @@ frame:RegisterEvent'INSPECT_READY'
 local cache = {}
 
 local TALENTS_PREFIX = 'Talents:|cffffffff ';
+local TALENTS_PREFIX_RE = '^'..TALENTS_PREFIX
 local CACHE_SIZE = 25
 
 local cache_talent = function(name, talent)
@@ -34,7 +35,8 @@ end
 local display_talent = function(talent)
     for i = 2, GameTooltip:NumLines() do
         local tl = _G['GameTooltipTextLeft'..i]
-        if(tl and tl:GetText():match('^'..TALENTS_PREFIX)) then
+        local line = tl and tl:GetText()
+        if(line and line:match(TALENTS_PREFIX_RE)) then
             return tl:SetText(TALENTS_PREFIX ..talent)
         end
     end
